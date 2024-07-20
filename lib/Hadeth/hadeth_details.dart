@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:islamic_app/Hadeth/hadeth_tap.dart';
 import 'package:islamic_app/Hadeth/item_hadeth.dart';
+import 'package:provider/provider.dart';
+
+import '../Providers/app_config_provider.dart';
+import '../app_color.dart';
 
 
 class HadethDetails extends StatelessWidget {
@@ -8,12 +12,20 @@ class HadethDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
+
     var args = ModalRoute.of(context)
         ?.settings
         .arguments as Hadeth;
 
     return Stack(children: [
+      provider.isDarkMode() ?
       Image.asset(
+        'assets/images/bg.png',
+        width: double.infinity,
+        height: double.infinity,
+        fit: BoxFit.fill,
+      ) : Image.asset(
         'assets/images/backgraund.png',
         width: double.infinity,
         height: double.infinity,
@@ -22,6 +34,7 @@ class HadethDetails extends StatelessWidget {
       Scaffold(
         appBar: AppBar(
           title: Text(args.title,
+
             style: Theme
                 .of(context)
                 .textTheme
@@ -50,7 +63,8 @@ class HadethDetails extends StatelessWidget {
                 .height * 0.06,
           ),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: provider.isDarkMode() ? AppColor.PrimarColorDark
+                :AppColor.WhiteColor,
             borderRadius: BorderRadius.circular(24),
 
           ),

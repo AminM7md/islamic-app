@@ -1,3 +1,5 @@
 {
-    "cmake.sourceDirectory": "D:/COURSES/Route/Flutter/Projects/islami/windows/flutter"
+    "cmake.sourceDirectory": "D:/COURSES/Route/Flutter/Projects/islamic_app/windows/flutter",
+    "debug.allowBreakpointsEverywhere": true,
+    "debug.autoExpandLazyVariables": true
 }

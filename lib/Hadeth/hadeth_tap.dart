@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islamic_app/Hadeth/item_hadeth_name.dart';
+import 'package:islamic_app/Providers/app_config_provider.dart';
+import 'package:provider/provider.dart';
 import '../app_color.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class HadethTap extends StatefulWidget {
   @override
@@ -13,33 +17,43 @@ class _HadethTapState extends State<HadethTap> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
+
     loadHadethFile();
 
     return Column(
       children: [
         Image.asset('assets/images/ahadeth_image.png'),
         Divider(
-          color: AppColor.PrimarColor,
+          color: provider.isDarkMode() ?
+          AppColor.SacndryColorDark
+              :AppColor.PrimarColor,
           thickness: 3,
         ),
-        Text('Hadeth Name',
+        Text(AppLocalizations.of(context)!.hadeth_name,
           style: Theme.of(context).textTheme.bodyMedium,
         ),
         Divider(
-          color: AppColor.PrimarColor,
+          color: provider.isDarkMode() ?
+          AppColor.SacndryColorDark
+              :AppColor.PrimarColor,
           thickness: 3,
         ),
         Expanded(
           child: ahadethList.isEmpty ?
             Center(child: CircularProgressIndicator(
-              color: AppColor.PrimarColor,
+              color: provider.isDarkMode() ?
+              AppColor.SacndryColorDark
+                  :AppColor.PrimarColor,
             )
               ,)
               :
           ListView.separated(
             separatorBuilder: (context,index){
               return Divider(
-                color: AppColor.PrimarColor,
+                color: provider.isDarkMode() ?
+                AppColor.SacndryColorDark
+                    :AppColor.PrimarColor,
                 thickness: 2,
               );
             },

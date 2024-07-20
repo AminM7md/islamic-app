@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islamic_app/Quran/item_sura.dart';
 import 'package:islamic_app/app_color.dart';
+import 'package:provider/provider.dart';
+
+import '../Providers/app_config_provider.dart';
 
 class SuraDetails extends StatefulWidget {
   static const String routeName = 'sura_details';
@@ -15,13 +18,20 @@ class _SuraDetailsState extends State<SuraDetails> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
     var args = ModalRoute.of(context)?.settings.arguments as SuraDetailsArgs;
     if (verses.isEmpty) {
       loadFile(args.index);
     }
     ;
     return Stack(children: [
+      provider.isDarkMode() ?
       Image.asset(
+        'assets/images/bg.png',
+        width: double.infinity,
+        height: double.infinity,
+        fit: BoxFit.fill,
+      ) : Image.asset(
         'assets/images/backgraund.png',
         width: double.infinity,
         height: double.infinity,
@@ -37,7 +47,8 @@ class _SuraDetailsState extends State<SuraDetails> {
         body: verses.isEmpty
             ? Center(
                 child: CircularProgressIndicator(
-                  color: AppColor.PrimarColor,
+                  color: provider.isDarkMode() ? AppColor.SacndryColorDark
+                      :AppColor.PrimarColor,
                 ),
               )
             : Container(
@@ -50,7 +61,8 @@ class _SuraDetailsState extends State<SuraDetails> {
                   vertical: MediaQuery.of(context).size.height * 0.06,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: provider.isDarkMode() ? AppColor.PrimarColorDark
+                      :AppColor.WhiteColor,
                   borderRadius: BorderRadius.circular(24),
                 ),
                 child: ListView.builder(

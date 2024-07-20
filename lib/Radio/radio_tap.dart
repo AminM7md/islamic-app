@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:islamic_app/app_color.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+
+import '../Providers/app_config_provider.dart';
+
 
 class RadioTap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
+
     return Column(children: [
       Container(
         margin: EdgeInsets.only(
@@ -22,7 +29,7 @@ class RadioTap extends StatelessWidget {
             right: 0.0,
             bottom: 0.0),
         child: Text(
-          'ازاعة القران الكريم',
+          AppLocalizations.of(context)!.radio_of_quran,
           style: Theme.of(context).textTheme.bodyLarge,
         ),
       ),
@@ -38,7 +45,9 @@ class RadioTap extends StatelessWidget {
               child: MaterialButton(
                 onPressed: () {},
                 child: ImageIcon(
-                    color: AppColor.PrimarColor,
+                    color: provider.isDarkMode() ?
+                    AppColor.SacndryColorDark
+                        :AppColor.PrimarColor,
                     AssetImage('assets/images/Icon metro-next.png')),
               )),
           Container(
@@ -50,7 +59,9 @@ class RadioTap extends StatelessWidget {
               child: MaterialButton(
                 onPressed: () {},
                 child: ImageIcon(
-                    color: AppColor.PrimarColor,
+                    color: provider.isDarkMode() ?
+                    AppColor.SacndryColorDark
+                        :AppColor.PrimarColor,
                     AssetImage('assets/images/Icon awesome-play.png')),
               )),
           Container(
@@ -62,7 +73,9 @@ class RadioTap extends StatelessWidget {
               child: MaterialButton(
                 onPressed: () {},
                 child: ImageIcon(
-                    color: AppColor.PrimarColor,
+                    color: provider.isDarkMode() ?
+                    AppColor.SacndryColorDark
+                        :AppColor.PrimarColor,
                     AssetImage('assets/images/Icon metro-next-l.png')),
               )),
         ],
